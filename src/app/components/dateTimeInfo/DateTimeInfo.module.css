@@ -1,0 +1,14 @@
+.date {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.dayHour {
+    font-size: 1.2rem;
+}
+
+.dmy {
+    font-size: .8rem;
+}
