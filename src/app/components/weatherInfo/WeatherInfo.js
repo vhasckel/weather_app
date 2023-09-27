@@ -20,6 +20,8 @@ const WeatherInfo = ({ weatherData }) => {
         return "snow.svg";
       case "neve":
         return "snow.svg";
+      case "trovoada com chuva fraca":
+        return "rain.svg";
       default:
         return "default.svg"; // Imagem padrão para descrições desconhecidas
     }
