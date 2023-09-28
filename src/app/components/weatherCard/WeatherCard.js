@@ -1,5 +1,3 @@
-"use client";
-import { useEffect, useState } from "react";
 import styles from "./WeatherCard.module.css";
 
 const WeatherCard = ({ weatherData, label }) => {
@@ -44,6 +42,7 @@ const WeatherCard = ({ weatherData, label }) => {
   const dataMapping = dataMappings[label];
   let infoText = "Indisponível";
 
+  //verifica se há um mapeamento de dados correspondente para o rótulo atual (label), é importante porque nem todos os rótulos tem um mapeamento correspondente no objeto dataMaping
   if (dataMapping) {
     const { property, subProperty, unit } = dataMapping;
 
@@ -51,7 +50,7 @@ const WeatherCard = ({ weatherData, label }) => {
       const value = subProperty
         ? weatherData[property][subProperty]
         : weatherData[property];
-      infoText = `${value}${unit || ""}`;
+      infoText = `${Math.round(value)}${unit || ""}`;
     }
   }
 

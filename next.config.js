@@ -1,4 +1,10 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const nextConfig = {};
 
-module.exports = nextConfig
+module.exports = nextConfig;
+
+module.exports = {
+  images: {
+    domains: ["openweathermap.org"], // Adicione o hostname permitido aqui
+  },
+};

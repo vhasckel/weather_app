@@ -11,6 +11,7 @@ const InputForm = ({ onCityChange }) => {
     setSearch(typedText);
   };
 
+  //essa função é chamada quando o usuário faz uma busca
   const handleSearch = () => {
     if (search) {
       onCityChange(search);
@@ -39,7 +40,7 @@ const InputForm = ({ onCityChange }) => {
           src="/search-icon.svg"
           width={24}
           height={24}
-          alt="Picture of the author"
+          alt="search icon"
         />
       </form>
     </div>

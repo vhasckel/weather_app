@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 export default function Home() {
   const [city, setCity] = useState("Florianópolis");
   const [weatherData, setWeatherData] = useState(null);
+  const [error, setError] = useState(null);
 
   const handleCityChange = async (newCity) => {
     setCity(newCity);
@@ -18,18 +19,27 @@ export default function Home() {
   useEffect(() => {
     const getWeather = async (city) => {
       try {
-        const APIKey = "3c31ccf9d661c27eb017a5b6ca5bab14";
-        console.log(APIKey);
+        const openWeatherAPIKey = "3c31ccf9d661c27eb017a5b6ca5bab14";
+        console.log(openWeatherAPIKey);
         const response = await fetch(
-          `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${APIKey}&lang=pt_br`
+          `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${openWeatherAPIKey}&lang=pt_br`
         );
+
+        if (!response.ok) {
+          throw new Error("Não foi possível obter dados.");
+        }
+
         const data = await response.json();
         setWeatherData(data);
-        console.log(data);
+        setError(null); //limpa erros anteriores
+        console.log(data.weather[0].icon);
       } catch (error) {
+        setError("Ocorreu um erro ao buscar dados.");
         console.log(error);
       }
     };
+
+    //se city não for uma tring vazia, chamamos a função getWeather
     if (city) {
       getWeather(city);
     }
@@ -49,6 +59,9 @@ export default function Home() {
     <main className={styles.main}>
       <section className={styles.left}>
         <InputForm onCityChange={handleCityChange} />
+
+        {error && <p className={styles.error}>{error}</p>}
+
         <WeatherInfo weatherData={weatherData} />
         <div className={styles.line}></div>
         <DateTimeInfo />
